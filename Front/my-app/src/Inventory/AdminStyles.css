@@ -1,0 +1,17 @@
+.Menu {
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    grid-column-gap: 10px;
+  }
+  
+  .AdminProducts {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+  
+  
+  }
+  
+

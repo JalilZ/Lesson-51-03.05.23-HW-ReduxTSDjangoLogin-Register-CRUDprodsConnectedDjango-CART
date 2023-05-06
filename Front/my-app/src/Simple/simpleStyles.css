@@ -1,0 +1,13 @@
+  /* About Us */
+  .IntroBackground {
+    font-family: Papyrus;
+    background-color: #D9C09F;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(5px + 3vmin);
+    color: black;
+  
+  }

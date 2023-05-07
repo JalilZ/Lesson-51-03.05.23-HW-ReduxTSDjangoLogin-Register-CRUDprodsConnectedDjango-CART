@@ -64,8 +64,9 @@ const Admin = () => {
                             <p className='card-text' style={{ fontSize: 'larger' }}>&#8362;{i.price}</p>
                             {/* the if to show that i.id cannot be underfined */}
                             <button type="button" className="btn btn-secondary" onClick={() => {if (i.id !== undefined){dispatch(updateProductsAsync({id: i.id, category: category, prod: prod, desc: desc, price: price, productImage: productImage}))}}}>Update Product</button>
-                            <button type="button" className="btn btn-danger" onClick={() => {if (i.id !== undefined){dispatch(deleteProductsAsync(i.id))}}}>Delete Product</button>
-                             
+                            {/* this works but the line below is much much easier <button type="button" className="btn btn-danger" onClick={() => {if (i.id !== undefined){dispatch(deleteProductsAsync(i.id))}}}>Delete Product</button> */}
+                            <button type="button" className="btn btn-danger" onClick={() => dispatch(deleteProductsAsync(i.id || 0))}>Delete Product</button>
+
                         </div>
                     </div>)}
             </div>

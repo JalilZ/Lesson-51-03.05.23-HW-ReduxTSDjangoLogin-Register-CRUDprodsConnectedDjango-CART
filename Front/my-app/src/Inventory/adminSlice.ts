@@ -48,7 +48,8 @@ export const deleteProductsAsync = createAsyncThunk(
   'admin/deleteProduct',
   async (id: number) => {
     const response = await deleteProduct(id);
-    return response.data;
+    // return response.data; //this also works - see 3 hashed lines below in the builder
+    return id
   }
 );
 
@@ -68,7 +69,8 @@ export const adminSlice = createSlice({
         state.products = action.payload
       })
       .addCase(postProductsAsync.fulfilled, (state, action) => {
-        state.products = [...state.products, action.payload]
+        // this works but the line below is easier state.products = [...state.products, action.payload]
+        state.products.push(action.payload)
       })
       .addCase(updateProductsAsync.fulfilled, (state, action) => {
         let itemToUpdate : prodType = state.products.filter(item => item.id === action.payload.id)[0] //find mathcing element (we will always find one)
@@ -76,9 +78,11 @@ export const adminSlice = createSlice({
         state.products[indexToUpdate] = action.payload //update the array memory (by ref)
       })
       .addCase(deleteProductsAsync.fulfilled, (state, action) => {
-        let itemToRemove : prodType = state.products.filter(item => item.id === action.payload.id)[0] //find mathcing element (we will always find one)
-        let indexToRemove : number = state.products.indexOf(itemToRemove)
-        state.products.splice(indexToRemove, 1)
+        // three lines below work (see the return of the deleteProductsAsyc above)
+        // let itemToRemove : prodType = state.products.filter(item => item.id === action.payload.id)[0] //find mathcing element (we will always find one)
+        // let indexToRemove : number = state.products.indexOf(itemToRemove)
+        // state.products.splice(indexToRemove, 1)
+        state.products = state.products.filter(prod => prod.id != action.payload)
 
       })
       

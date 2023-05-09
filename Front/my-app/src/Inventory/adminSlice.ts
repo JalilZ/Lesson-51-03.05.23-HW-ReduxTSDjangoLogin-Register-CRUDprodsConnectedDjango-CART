@@ -70,12 +70,12 @@ export const adminSlice = createSlice({
       })
       .addCase(postProductsAsync.fulfilled, (state, action) => {
         // this works but the line below is easier state.products = [...state.products, action.payload]
-        state.products.push(action.payload)
+        state.products.push(action.payload) 
       })
       .addCase(updateProductsAsync.fulfilled, (state, action) => {
         let itemToUpdate : prodType = state.products.filter(item => item.id === action.payload.id)[0] //find mathcing element (we will always find one)
         let indexToUpdate : number = state.products.indexOf(itemToUpdate)
-        state.products[indexToUpdate] = action.payload //update the array memory (by ref)
+        state.products[indexToUpdate] = action.payload //update the array memory (by ref) // i think this line makes my code CRASH because it updates image state fast (string link), but there is still no image uploaded
       })
       .addCase(deleteProductsAsync.fulfilled, (state, action) => {
         // three lines below work (see the return of the deleteProductsAsyc above)

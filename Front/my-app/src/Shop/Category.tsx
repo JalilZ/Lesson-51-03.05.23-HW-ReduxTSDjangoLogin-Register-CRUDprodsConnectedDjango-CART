@@ -4,6 +4,8 @@ import './Styles.css';
 import Cart from './Cart';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import shopProdType from './shopProdType';
+import { selectLoggedStatus } from '../Access/accessSlice'; // so if selectLoggedStatus === false, dont display SuperProds and cart
+
 
 import './Styles.css';
 import {
@@ -15,10 +17,13 @@ import {
 } from './superSlice';
 
 
+
 const Category = (props: { CategoryName: string }) => {
     const mycart = useAppSelector(selectCart);
     const SuperProds = useAppSelector(selectSuperProds);
     const dispatch = useAppDispatch();
+    const loggedstatus = useAppSelector(selectLoggedStatus);
+
 
 
 
@@ -44,8 +49,9 @@ const Category = (props: { CategoryName: string }) => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-
+            {loggedstatus? (
             <div className='Menu'>
+                
                 {SuperProds.map((i) =>
                     <div key={i.id}>
                         <div className='card border-dark mb-3' style={{ width: '18rem' }}>
@@ -56,11 +62,14 @@ const Category = (props: { CategoryName: string }) => {
                             <p className='card-text' style={{ fontSize: 'larger' }}>&#8362;{i.price}</p>
                             <button className='btn btn-dark' onClick={() => dispatch(AddItem(i))}>Add To Cart</button>
                         </div>
-                    </div>)}
+                    </div>)
+                }
+            
             </div>
+            ) :<div>Please Log-in !</div>}
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Cart/>
+                {loggedstatus? <Cart/>: <div></div>}
             </div>
         </div>
     )

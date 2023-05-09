@@ -4,6 +4,8 @@ import { getShopProducts } from './superSliceAPI';
 // import prodType from '../Inventory/prodType'
 import shopProdType from './shopProdType';
 
+
+
 export interface CartState {
   mycart: Array<shopProdType>;
   // mycart: shopProdType[]; also works

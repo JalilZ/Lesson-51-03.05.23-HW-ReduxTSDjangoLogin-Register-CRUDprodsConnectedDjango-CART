@@ -53,8 +53,8 @@ export function updateProduct(prod: prodType) {
 export function deleteProduct(id: number) {
   const MyToken = sessionStorage.getItem('token')
   const config = {headers: {'Authorization': `Bearer ${MyToken}`}}          //authentication
-  return new Promise<{ data: prodType }>((resolve) =>
-    axios.delete(`http://127.0.0.1:8000/products/${id}`, config).then(res => resolve({data: res.data}))
+  return new Promise<{ data: any }>((resolve) => //type any (there is no actual data that returns so it does not matter ..)
+    axios.delete(`http://127.0.0.1:8000/products/${id}`, config).then(res => resolve({data: res.data})) //there is nothing to return
   );
 }
 
